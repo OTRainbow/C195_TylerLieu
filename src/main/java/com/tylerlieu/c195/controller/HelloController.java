@@ -1,4 +1,4 @@
-package com.tylerlieu.c195;
+package com.tylerlieu.c195.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
