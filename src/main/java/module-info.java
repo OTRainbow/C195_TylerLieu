@@ -9,4 +9,6 @@ module com.tylerlieu.c195 {
     exports com.tylerlieu.c195;
     exports com.tylerlieu.c195.controller;
     opens com.tylerlieu.c195.controller to javafx.fxml;
+    exports com.tylerlieu.c195.model;
+    opens com.tylerlieu.c195.model to javafx.fxml;
 }

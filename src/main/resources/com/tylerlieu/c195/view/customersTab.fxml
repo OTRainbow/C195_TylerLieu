@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tylerlieu.c195.controller.CustomersController">
+    <TableView fx:id="customersTable" layoutX="14.0" layoutY="77.0" prefHeight="600.0" prefWidth="840.0">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="48.0" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="143.0" text="Name" />
+            <TableColumn fx:id="phoneColumn" prefWidth="97.0" text="Phone" />
+            <TableColumn fx:id="addressColumn" prefWidth="181.0" text="Address" />
+            <TableColumn fx:id="divisionColumn" prefWidth="127.0" text="State / Division" />
+            <TableColumn fx:id="countryColumn" prefWidth="109.0" text="Country" />
+            <TableColumn fx:id="postalColumn" prefWidth="134.0" text="Postal Code" />
+        </columns>
+    </TableView>
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="52.0" prefWidth="337.0" text=" Customers">
+        <font>
+            <Font name="System Bold" size="32.0" />
+        </font>
+    </Label>
+   <Button layoutX="866.0" layoutY="77.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Button" />
+   <Button layoutX="866.0" layoutY="183.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Button" />
+   <Button layoutX="866.0" layoutY="289.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="Button" />
+</AnchorPane>
