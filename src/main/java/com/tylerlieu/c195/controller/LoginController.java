@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -54,7 +52,7 @@ public class LoginController  implements Initializable {
         }
     }
 
-    public void onButtonLoginClick(ActionEvent actionEvent) throws IOException {
+    public void onButtonLoginClick(ActionEvent actionEvent) {
         String username = fldUsername.getText();
         String password = fldPassword.getText();
         // Check for blank fields
@@ -74,6 +72,7 @@ public class LoginController  implements Initializable {
             }
         }
         catch ( Exception e) {
+            e.printStackTrace();
             sqlException.showAndWait();
         }
     }

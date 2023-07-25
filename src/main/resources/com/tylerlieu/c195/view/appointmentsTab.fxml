@@ -7,18 +7,28 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.tylerlieu.c195.controller.AppointmentsController" minHeight="0.0" minWidth="0.0">
-    <children>
-        <Label layoutX="14.0" layoutY="14.0" prefHeight="52.0" prefWidth="337.0" text=" Appointments">
-            <font>
-                <Font name="System Bold" size="32.0" />
-            </font>
-        </Label>
-        <TableView layoutX="14.0" layoutY="77.0" prefHeight="600.0" prefWidth="720.0">
-            <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-            </columns>
-        </TableView>
-    </children>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.tylerlieu.c195.controller.AppointmentsController">
+    <TableView fx:id="appointmentsTable" layoutX="14.0" layoutY="77.0" prefHeight="600.0" prefWidth="840.0">
+        <columns>
+            <TableColumn prefWidth="75.0" text="C1"/>
+            <TableColumn prefWidth="75.0" text="C2"/>
+        </columns>
+    </TableView>
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="52.0" prefWidth="337.0" text=" Appointments">
+        <font>
+            <Font name="System Bold" size="32.0"/>
+        </font>
+    </Label>
+    <Button fx:id="btnAddAppointment" layoutX="866.0" layoutY="77.0" mnemonicParsing="false" onAction="#onButtonAddClick" prefHeight="100.0" prefWidth="200.0" text="Add">
+        <font>
+            <Font size="24.0" />
+        </font></Button>
+    <Button fx:id="btnUpdateAppointment" layoutX="866.0" layoutY="183.0" mnemonicParsing="false" onAction="#onButtonUpdateClick" prefHeight="100.0" prefWidth="200.0" text="Update">
+        <font>
+            <Font size="24.0" />
+        </font></Button>
+    <Button fx:id="btnDeleteAppointment" layoutX="866.0" layoutY="289.0" mnemonicParsing="false" onAction="#onButtonDeleteClick" prefHeight="100.0" prefWidth="200.0" text="Delete">
+        <font>
+            <Font size="24.0" />
+        </font></Button>
 </AnchorPane>
