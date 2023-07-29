@@ -50,6 +50,10 @@ public class Customer {
         this.customerID = customerID;
         this.name = name;
     }
+    @Override
+    public String toString() {
+        return (Integer.toString(customerID) + " " + name);
+    }
     public int getCustomerID() {
         return customerID;
     }

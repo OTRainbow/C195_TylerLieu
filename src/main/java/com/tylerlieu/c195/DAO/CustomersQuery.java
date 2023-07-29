@@ -1,6 +1,8 @@
 package com.tylerlieu.c195.DAO;
 
+import com.tylerlieu.c195.model.AppointmentTypeCount;
 import com.tylerlieu.c195.model.Customer;
+import com.tylerlieu.c195.model.CustomerDivisionCount;
 import com.tylerlieu.c195.model.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -70,7 +72,7 @@ public class CustomersQuery {
         statement.setString(4, customer.getPhone());
         statement.setString(5, Session.user.getUserName());
         statement.setString(6, Session.user.getUserName());
-        statement.setString(7, Integer.toString(customer.getDivisionID()));
+        statement.setInt(7, customer.getDivisionID());
         statement.executeUpdate();
         statement.close();
     }
@@ -93,16 +95,40 @@ public class CustomersQuery {
         statement.setString(3, updatedCustomer.getPostal());
         statement.setString(4, updatedCustomer.getPhone());
         statement.setString(5, Session.user.getUserName());
-        statement.setString(6, Integer.toString(updatedCustomer.getDivisionID()));
-        statement.setString(7, Integer.toString(updatedCustomer.getCustomerID()));
+        statement.setInt(6, updatedCustomer.getDivisionID());
+        statement.setInt(7, updatedCustomer.getCustomerID());
         statement.executeUpdate();
         statement.close();
     }
     public static void deleteCustomer(Customer customer) throws SQLException {
         String query = "DELETE FROM customers WHERE Customer_ID = ?;";
         PreparedStatement statement = DB.connection.prepareStatement(query);
-        statement.setString(1, Integer.toString(customer.getCustomerID()));
+        statement.setInt(1, customer.getCustomerID());
         statement.executeUpdate();
         statement.close();
+    }
+    public static ObservableList<CustomerDivisionCount> getCustomerDivisionCountRecords() throws SQLException {
+        String query = "" +
+            "SELECT cou.Country, fld.Division, COUNT(*) " +
+            "FROM customers as cus " +
+            "INNER JOIN first_level_divisions as fld " +
+            "ON cus.Division_ID = fld.Division_ID " +
+            "INNER JOIN countries as cou " +
+            "ON fld.Country_ID = cou.Country_ID " +
+            "GROUP BY cou.Country, fld.Division;";
+        Statement statement = DB.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        ObservableList<CustomerDivisionCount> customerDivisionsList = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            customerDivisionsList.add(new CustomerDivisionCount(
+                resultSet.getString("Country"),
+                resultSet.getString("Division"),
+                resultSet.getInt("COUNT(*)")
+            ));
+        }
+        resultSet.close();
+        statement.close();
+        return customerDivisionsList;
     }
 }

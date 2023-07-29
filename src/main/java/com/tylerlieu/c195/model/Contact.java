@@ -9,7 +9,10 @@ public class Contact {
         this.name = name;
         this.email = email;
     }
-
+    @Override
+    public String toString() {
+        return (Integer.toString(contactID) + " " + name + " " + email);
+    }
     public int getContactID() {
         return contactID;
     }

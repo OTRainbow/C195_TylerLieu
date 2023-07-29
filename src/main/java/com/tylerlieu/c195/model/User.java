@@ -7,6 +7,10 @@ public class User {
         this.userID = userID;
         this.userName = userName;
     }
+    @Override
+    public String toString() {
+        return (Integer.toString(userID) + " " + userName);
+    }
     public int getUserID() {
         return this.userID;
     }

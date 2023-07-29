@@ -1,5 +1,6 @@
 package com.tylerlieu.c195.controller;
 
+import com.tylerlieu.c195.DAO.AppointmentsQuery;
 import com.tylerlieu.c195.DAO.CustomersQuery;
 import com.tylerlieu.c195.Main;
 import com.tylerlieu.c195.model.Customer;
@@ -103,7 +104,6 @@ public class CustomersController implements Initializable {
         }
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public void onButtonDeleteClick(ActionEvent actionEvent) {
         selectedCustomer = customersTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
@@ -115,10 +115,11 @@ public class CustomersController implements Initializable {
         if (result.get() == ButtonType.OK) {
             try {
                 // Delete all associated appointments
-
+                AppointmentsQuery.deleteAppointmentsByCustomerID(selectedCustomer);
                 //
                 CustomersQuery.deleteCustomer(selectedCustomer);
                 loadTable();
+                AppointmentsController.loadTable();
                 doneDelete.setContentText(selectedCustomer.getName() + " has been deleted from the database.");
                 doneDelete.showAndWait();
             } catch (SQLException e) {

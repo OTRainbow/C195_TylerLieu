@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tylerlieu.c195.controller.HomeController">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="240.0" layoutX="14.0" layoutY="149.0" stroke="BLACK" strokeType="INSIDE" width="320.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="260.0" layoutX="14.0" layoutY="395.0" stroke="BLACK" strokeType="INSIDE" width="1052.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="240.0" layoutX="746.0" layoutY="149.0" stroke="BLACK" strokeType="INSIDE" width="320.0" />
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="52.0" prefWidth="337.0" text=" Home">
+        <font>
+            <Font name="System Bold" size="32.0" />
+        </font>
+    </Label>
+   <Label fx:id="lblUpcomingAppointment" layoutX="22.0" layoutY="79.0" text="Upcoming Appointment: None">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="lblSignedInAs" layoutX="22.0" layoutY="119.0" text="Signed In As: ">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" layoutX="372.0" layoutY="243.0" prefHeight="52.0" prefWidth="337.0" text="Reports">
+      <font>
+         <Font name="System Bold" size="32.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" layoutX="14.0" layoutY="149.0" prefHeight="35.0" prefWidth="320.0" text="# of Appointments by Type and Month">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <Label layoutX="24.0" layoutY="406.0" prefHeight="35.0" prefWidth="320.0" text="Appointment Schedule by Contact">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" layoutX="746.0" layoutY="149.0" prefHeight="35.0" prefWidth="320.0" text="# of Customers by Division">
+      <font>
+         <Font name="System Bold" size="16.0" />
+      </font>
+   </Label>
+   <ComboBox fx:id="cboxContact" layoutX="296.0" layoutY="411.0" onAction="#onContactSelect" prefWidth="150.0" promptText="Select Contact" />
+   <TableView fx:id="appointmentTypesTable" layoutX="24.0" layoutY="184.0" prefHeight="200.0" prefWidth="300.0">
+     <columns>
+       <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year" />
+       <TableColumn fx:id="monthColumn" prefWidth="75.0" text="Month" />
+         <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
+         <TableColumn fx:id="totalAppointmentsColumn" prefWidth="75.0" text="Total" />
+     </columns>
+   </TableView>
+   <TableView fx:id="contactScheduleTable" layoutX="24.0" layoutY="447.0" prefHeight="200.0" prefWidth="1020.0">
+     <columns>
+       <TableColumn fx:id="appointmentIDColumn" prefWidth="100.0" text="AppointmentID" />
+       <TableColumn fx:id="titleColumn" prefWidth="100.0" text="Title" />
+         <TableColumn fx:id="contactAppointmentTypeColumn" prefWidth="120.0" text="Type" />
+         <TableColumn fx:id="descriptionColumn" minWidth="300.0" prefWidth="200.0" text="Description" />
+         <TableColumn fx:id="startColumn" prefWidth="150.0" text="Start" />
+         <TableColumn fx:id="endColumn" prefWidth="150.0" text="End" />
+         <TableColumn fx:id="customerIDColumn" prefWidth="100.0" text="CustomerID" />
+     </columns>
+   </TableView>
+   <TableView fx:id="customerDivisionsTable" layoutX="756.0" layoutY="184.0" prefHeight="200.0" prefWidth="300.0">
+     <columns>
+       <TableColumn fx:id="countryColumn" prefWidth="95.0" text="Country" />
+       <TableColumn fx:id="divisionColumn" prefWidth="95.0" text="Division" />
+         <TableColumn fx:id="totalCustomersColumn" prefWidth="110.0" text="Total Customers" />
+     </columns>
+   </TableView>
+</AnchorPane>

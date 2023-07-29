@@ -1,6 +1,10 @@
 package com.tylerlieu.c195.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     private int appointmentID;
@@ -8,8 +12,8 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private Date startDate;
-    private Date endDate;
+    private ZonedDateTime startDate;
+    private ZonedDateTime endDate;
     private int customerID;
     private String customerName;
     private int userID;
@@ -20,7 +24,16 @@ public class Appointment {
     private Customer customer;
     private User user;
     private Contact contact;
-    public Appointment(int appointmentID, String title, String description, String location, String type, Date startDate, Date endDate, int customerID, String customerName, int userID, String userName, int contactID, String contactName, String contactEmail) {
+    // Derived from startDate and endDate
+    private ZonedDateTime startDateUTC;
+    private ZonedDateTime endDateUTC;
+    private ZonedDateTime startDateLocal;
+    private ZonedDateTime endDateLocal;
+    private ZonedDateTime startDateInET;
+    private ZonedDateTime endDateInET;
+    private String startDateLocalDisplay;
+    private String endDateLocalDisplay;
+    public Appointment(int appointmentID, String title, String description, String location, String type, ZonedDateTime startDate, ZonedDateTime endDate, int customerID, String customerName, int userID, String userName, int contactID, String contactName, String contactEmail) {
         this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
@@ -38,6 +51,90 @@ public class Appointment {
         this.customer = new Customer(customerID, customerName);
         this.user = new User(userID, userName);
         this.contact = new Contact(contactID, contactName, contactEmail);
+
+        if (startDate.getZone().equals(ZoneOffset.UTC)) {
+            this.startDateUTC = startDate;
+        } else {
+            this.startDateUTC = startDate.withZoneSameInstant(ZoneOffset.UTC);
+        }
+        if (endDate.getZone().equals(ZoneOffset.UTC)) {
+            this.endDateUTC = endDate;
+        } else {
+            this.endDateUTC = endDate.withZoneSameInstant(ZoneOffset.UTC);
+        }
+        if (startDate.getZone().equals(ZoneId.systemDefault())) {
+            this.startDateLocal = startDate;
+        } else {
+            this.startDateLocal = startDate.withZoneSameInstant(ZoneId.systemDefault());
+        }
+        if (endDate.getZone().equals(ZoneId.systemDefault())) {
+            this.endDateLocal = endDate;
+        } else {
+            this.endDateLocal = endDate.withZoneSameInstant(ZoneId.systemDefault());
+        }
+        if (startDate.getZone().equals(ZoneId.of("America/New_York"))) {
+            this.startDateInET = startDate;
+        } else {
+            this.startDateInET = startDate.withZoneSameInstant(ZoneId.of("America/New_York"));
+        }
+        if (endDate.getZone().equals(ZoneId.of("America/New_York"))) {
+            this.endDateInET = endDate;
+        } else {
+            this.endDateInET = endDate.withZoneSameInstant(ZoneId.of("America/New_York"));
+        }
+        this.startDateLocalDisplay = startDateLocal.toLocalDateTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma"));
+        this.endDateLocalDisplay = endDateLocal.toLocalDateTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma"));
+    }
+    public Appointment(String title, String description, String location, String type, ZonedDateTime startDate, ZonedDateTime endDate, int customerID, String customerName, int userID, String userName, int contactID, String contactName, String contactEmail) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.type = type;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.userID = userID;
+        this.userName = userName;
+        this.contactID = contactID;
+        this.contactName = contactName;
+        this.contactEmail = contactEmail;
+        this.customer = new Customer(customerID, customerName);
+        this.user = new User(userID, userName);
+        this.contact = new Contact(contactID, contactName, contactEmail);
+
+        if (startDate.getZone().equals(ZoneOffset.UTC)) {
+            this.startDateUTC = startDate;
+        } else {
+            this.startDateUTC = startDate.withZoneSameInstant(ZoneOffset.UTC);
+        }
+        if (endDate.getZone().equals(ZoneOffset.UTC)) {
+            this.endDateUTC = endDate;
+        } else {
+            this.endDateUTC = endDate.withZoneSameInstant(ZoneOffset.UTC);
+        }
+        if (startDate.getZone().equals(ZoneId.systemDefault())) {
+            this.startDateLocal = startDate;
+        } else {
+            this.startDateLocal = startDate.withZoneSameInstant(ZoneId.systemDefault());
+        }
+        if (endDate.getZone().equals(ZoneId.systemDefault())) {
+            this.endDateLocal = endDate;
+        } else {
+            this.endDateLocal = endDate.withZoneSameInstant(ZoneId.systemDefault());
+        }
+        if (startDate.getZone().equals(ZoneId.of("America/New_York"))) {
+            this.startDateInET = startDate;
+        } else {
+            this.startDateInET = startDate.withZoneSameInstant(ZoneId.of("America/New_York"));
+        }
+        if (endDate.getZone().equals(ZoneId.of("America/New_York"))) {
+            this.endDateInET = endDate;
+        } else {
+            this.endDateInET = endDate.withZoneSameInstant(ZoneId.of("America/New_York"));
+        }
+        this.startDateLocalDisplay = startDateLocal.toLocalDateTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma"));
+        this.endDateLocalDisplay = endDateLocal.toLocalDateTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mma"));
     }
 
     public int getAppointmentID() {
@@ -60,11 +157,11 @@ public class Appointment {
         return type;
     }
 
-    public Date getStartDate() {
+    public ZonedDateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public ZonedDateTime getEndDate() {
         return endDate;
     }
 
@@ -106,5 +203,37 @@ public class Appointment {
 
     public Contact getContact() {
         return contact;
+    }
+
+    public ZonedDateTime getStartDateUTC() {
+        return startDateUTC;
+    }
+
+    public ZonedDateTime getEndDateUTC() {
+        return endDateUTC;
+    }
+
+    public ZonedDateTime getStartDateLocal() {
+        return startDateLocal;
+    }
+
+    public ZonedDateTime getEndDateLocal() {
+        return endDateLocal;
+    }
+
+    public ZonedDateTime getStartDateInET() {
+        return startDateInET;
+    }
+
+    public ZonedDateTime getEndDateInET() {
+        return endDateInET;
+    }
+
+    public String getStartDateLocalDisplay() {
+        return startDateLocalDisplay;
+    }
+
+    public String getEndDateLocalDisplay() {
+        return endDateLocalDisplay;
     }
 }

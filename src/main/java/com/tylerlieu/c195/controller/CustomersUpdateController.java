@@ -33,12 +33,10 @@ public class CustomersUpdateController implements Initializable {
     public ObservableList<Division> divisionsList;
     public Alert blankFields;
     public Alert attemptFailed;
-    public Customer oldCustomer;
+    public Customer oldCustomer = CustomersController.selectedCustomer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        oldCustomer = CustomersController.selectedCustomer;
-
         blankFields = new Alert(Alert.AlertType.ERROR);
         blankFields.setContentText("One or more items have been left blank. Please fill in all fields.");
         attemptFailed = new Alert(Alert.AlertType.ERROR);
@@ -83,7 +81,7 @@ public class CustomersUpdateController implements Initializable {
             fldAddress.getText(),
             fldPostal.getText(),
             fldPhone.getText(),
-            ((Division)cboxDivision.getValue()).getDivisionID()
+            cboxDivision.getValue().getDivisionID()
         );
         try {
             CustomersQuery.updateCustomer(updatedCustomer);
@@ -92,6 +90,7 @@ public class CustomersUpdateController implements Initializable {
             throw new RuntimeException(e);
         }
         CustomersController.loadTable();
+        HomeController.loadCustomerDivisionsTable();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }

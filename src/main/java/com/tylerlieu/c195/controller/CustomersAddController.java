@@ -75,6 +75,7 @@ public class CustomersAddController implements Initializable {
             throw new RuntimeException(e);
         }
         CustomersController.loadTable();
+        HomeController.loadCustomerDivisionsTable();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }

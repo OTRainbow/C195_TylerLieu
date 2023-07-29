@@ -5,25 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7810962-50ee-4798-940c-2cde66798e45" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/AppointmentsQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/CountriesQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/DivisionsQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersAddController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersUpdateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/customersAddForm.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/customersUpdateForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/ContactsQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/AppointmentsAddController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/AppointmentsUpdateController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/login_activity.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/AppointmentTypeCount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/CustomerDivisionCount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/appointmentsAddForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/appointmentsUpdateForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/homeTab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/AppointmentsQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/AppointmentsQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/CustomersQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/CustomersQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/UsersQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/DAO/UsersQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/AppointmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/AppointmentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersAddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersAddController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersUpdateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/CustomersUpdateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/AppointmentItem.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Country.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/CustomerItem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Division.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/Division.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tylerlieu/c195/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/appointmentsTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/appointmentsTab.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/customersTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/tylerlieu/c195/view/customersTab.fxml" afterDir="false" />
@@ -59,7 +63,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Tyler/Downloads/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.40689656",
     "settings.editor.selected.configurable": "configurable.group.editor"
@@ -122,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690096017302</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initial Commit">
+      <created>1690323437660</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1690323437660</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

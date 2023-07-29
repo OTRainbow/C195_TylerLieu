@@ -7,17 +7,15 @@
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tylerlieu.c195.controller.MainController">
   <tabs>
       <Tab text="Home">
-          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-          </content>
+          <fx:include source="homeTab.fxml" />
       </Tab>
 
       <Tab text="Appointments">
-      <fx:include fx:id="appointmentsTab" source="appointmentsTab.fxml" />
+      <fx:include source="appointmentsTab.fxml" />
       </Tab>
 
       <Tab text="Customers">
-        <fx:include fx:id="customersTab" source="customersTab.fxml" />
+        <fx:include source="customersTab.fxml" />
       </Tab>
   </tabs>
 </TabPane>
