@@ -21,8 +21,8 @@
         <DatePicker fx:id="datePicker" layoutX="114.0" layoutY="280.0" onAction="#onDateSelected" prefHeight="25.0" prefWidth="150.0" promptText="[select date]" />
         <ComboBox fx:id="cboxStartTime" layoutX="113.0" layoutY="312.0" onAction="#onStartTimeSelect" prefWidth="150.0" promptText="[select time]" />
         <ComboBox fx:id="cboxEndTime" layoutX="113.0" layoutY="343.0" prefWidth="150.0" promptText="[select time]" />
-        <Button fx:id="btnUpdate" layoutX="208.0" layoutY="375.0" mnemonicParsing="false" onAction="#onButtonUpdateClick" text="Update" />
-        <Button fx:id="btnCancel" layoutX="146.0" layoutY="375.0" mnemonicParsing="false" onAction="#onButtonCancelClick" text="Cancel" />
+        <Button layoutX="208.0" layoutY="375.0" mnemonicParsing="false" onAction="#onButtonUpdateClick" text="Update" />
+        <Button layoutX="146.0" layoutY="375.0" mnemonicParsing="false" onAction="#onButtonCancelClick" text="Cancel" />
         <Label alignment="CENTER_RIGHT" disable="true" layoutX="37.0" layoutY="18.0" prefHeight="17.0" prefWidth="70.0" text="ID" />
         <Label alignment="CENTER_RIGHT" layoutX="37.0" layoutY="50.0" prefHeight="17.0" prefWidth="70.0" text="Title" />
         <Label alignment="CENTER_RIGHT" layoutX="37.0" layoutY="87.0" prefHeight="17.0" prefWidth="70.0" text="Description" />

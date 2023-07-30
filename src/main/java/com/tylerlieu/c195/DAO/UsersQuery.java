@@ -66,7 +66,7 @@ public class UsersQuery {
             System.out.println("Login successful.");
             bufferedWriter.write("\nSUCCESS," +
                     ZonedDateTime.now().withZoneSameInstant(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")) +
-                    "," + username);
+                    " UTC, User: " + username);
             resultSet.close();
             statement.close();
             bufferedWriter.close();
@@ -75,7 +75,7 @@ public class UsersQuery {
             System.out.println("Login failed.");
             bufferedWriter.write("\nFAILURE," +
                     ZonedDateTime.now().withZoneSameInstant(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")) +
-                    "," + username);
+                    " UTC, User: " + username);
             resultSet.close();
             statement.close();
             bufferedWriter.close();

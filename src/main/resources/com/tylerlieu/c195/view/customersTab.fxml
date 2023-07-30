@@ -24,15 +24,15 @@
             <Font name="System Bold" size="32.0" />
         </font>
     </Label>
-   <Button fx:id="btnAddCustomer" layoutX="866.0" layoutY="77.0" mnemonicParsing="false" onAction="#onButtonAddClick" prefHeight="100.0" prefWidth="200.0" text="Add">
+   <Button layoutX="866.0" layoutY="77.0" mnemonicParsing="false" onAction="#onButtonAddClick" prefHeight="100.0" prefWidth="200.0" text="Add">
       <font>
          <Font size="24.0" />
       </font></Button>
-   <Button fx:id="btnUpdateCustomer" layoutX="866.0" layoutY="183.0" mnemonicParsing="false" onAction="#onButtonUpdateClick" prefHeight="100.0" prefWidth="200.0" text="Update">
+   <Button layoutX="866.0" layoutY="183.0" mnemonicParsing="false" onAction="#onButtonUpdateClick" prefHeight="100.0" prefWidth="200.0" text="Update">
       <font>
          <Font size="24.0" />
       </font></Button>
-   <Button fx:id="btnDeleteCustomer" layoutX="866.0" layoutY="289.0" mnemonicParsing="false" onAction="#onButtonDeleteClick" prefHeight="100.0" prefWidth="200.0" text="Delete">
+   <Button layoutX="866.0" layoutY="289.0" mnemonicParsing="false" onAction="#onButtonDeleteClick" prefHeight="100.0" prefWidth="200.0" text="Delete">
       <font>
          <Font size="24.0" />
       </font></Button>
