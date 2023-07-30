@@ -186,8 +186,8 @@ public class AppointmentsController implements Initializable {
         }
         ZonedDateTime today = ZonedDateTime.now();
         Month currentMonth = today.getMonth();
-        ZonedDateTime beginWeek = today.minusDays(today.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue());
-        ZonedDateTime endWeek = today.plusDays(DayOfWeek.SUNDAY.getValue() - today.getDayOfWeek().getValue());
+        ZonedDateTime beginWeek = today.minusDays(today.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue()).withHour(0).withMinute(0);
+        ZonedDateTime endWeek = today.plusDays(DayOfWeek.SUNDAY.getValue() - today.getDayOfWeek().getValue()).withHour(23).withMinute(59);
         appointmentsMonthList = new FilteredList<>(appointmentsList, appointment -> appointment.getStartDateLocal().getMonth().equals(currentMonth));
         appointmentsWeekList = new FilteredList<>(appointmentsList, appointment -> !appointment.getStartDateLocal().isBefore(beginWeek) && !appointment.getStartDateLocal().isAfter(endWeek));
     }

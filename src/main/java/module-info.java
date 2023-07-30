@@ -2,7 +2,7 @@ module com.tylerlieu.c195 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires mysql.connector.j;
+    requires mysql.connector.java;
 
 
     opens com.tylerlieu.c195 to javafx.fxml;

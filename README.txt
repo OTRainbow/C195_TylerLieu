@@ -29,4 +29,4 @@ Directions:
 A3f Report:
     A report that shows how many customers live in each division
 MySQL Connector:
-    mysql-connector-j-8.0.332
+    mysql-connector-java-8.0.25
