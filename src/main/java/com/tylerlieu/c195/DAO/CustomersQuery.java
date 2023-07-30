@@ -1,6 +1,5 @@
 package com.tylerlieu.c195.DAO;
 
-import com.tylerlieu.c195.model.AppointmentTypeCount;
 import com.tylerlieu.c195.model.Customer;
 import com.tylerlieu.c195.model.CustomerDivisionCount;
 import com.tylerlieu.c195.model.Session;
@@ -11,8 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * Static class for methods used to perform queries on the customers table
+ */
 public class CustomersQuery {
+    /**
+     * Retrieves all Customers from the database.
+     * @return An ObservableList of Customer objects
+     * @throws SQLException
+     */
     public static ObservableList<Customer> getAllCustomerRecords() throws SQLException {
         String query = "" +
             "SELECT " +
@@ -51,6 +57,12 @@ public class CustomersQuery {
         statement.close();
         return customersList;
     }
+
+    /**
+     * Adds a Customer to the database
+     * @param customer Primary Key not needed
+     * @throws SQLException
+     */
     public static void addCustomer(Customer customer) throws SQLException {
         String query = "" +
             "INSERT INTO customers( " +
@@ -77,6 +89,11 @@ public class CustomersQuery {
         statement.close();
     }
 
+    /**
+     * Updates an existing Customer record in the database
+     * @param updatedCustomer Requires Primary Key
+     * @throws SQLException
+     */
     public static void updateCustomer(Customer updatedCustomer) throws SQLException {
         String query = "" +
             "UPDATE customers " +
@@ -100,6 +117,12 @@ public class CustomersQuery {
         statement.executeUpdate();
         statement.close();
     }
+
+    /**
+     * Deletes a Customer from the database
+     * @param customer Requires Primary Key
+     * @throws SQLException
+     */
     public static void deleteCustomer(Customer customer) throws SQLException {
         String query = "DELETE FROM customers WHERE Customer_ID = ?;";
         PreparedStatement statement = DB.connection.prepareStatement(query);
@@ -107,6 +130,14 @@ public class CustomersQuery {
         statement.executeUpdate();
         statement.close();
     }
+
+
+    /**
+     * Retrieves a list of Divisions along with their Country and a count of how many customers live there.
+     * REQUIREMENT 3f: Used to create one of the three required reports
+     * @return An ObservableList of CustomerDivisionCount objects
+     * @throws SQLException
+     */
     public static ObservableList<CustomerDivisionCount> getCustomerDivisionCountRecords() throws SQLException {
         String query = "" +
             "SELECT cou.Country, fld.Division, COUNT(*) " +

@@ -12,8 +12,15 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Static class for methods used to perform queries on the appointments table
+ */
 public class AppointmentsQuery {
+    /**
+     * Retrieve all Appointments from the database.
+     * @return An ObservableList of Appointment objects
+     * @throws SQLException
+     */
     public static ObservableList<Appointment> getAllAppointmentRecords() throws SQLException {
         String query = "" +
             "SELECT " +
@@ -64,6 +71,11 @@ public class AppointmentsQuery {
         statement.close();
         return appointmentsList;
     }
+    /**
+     * Adds an Appointment to the database
+     * @param appointment Primary Key not needed
+     * @throws SQLException
+     */
     public static void addAppointment(Appointment appointment) throws SQLException {
         String query = "" +
             "INSERT INTO appointments( " +
@@ -97,6 +109,11 @@ public class AppointmentsQuery {
         statement.executeUpdate();
         statement.close();
     }
+    /**
+     * Updates an existing Appointment record in the database
+     * @param updatedAppointment Requires Primary Key
+     * @throws SQLException
+     */
     public static void updateAppointment(Appointment updatedAppointment) throws SQLException {
         String query = "" +
             "UPDATE appointments " +
@@ -128,6 +145,11 @@ public class AppointmentsQuery {
         statement.executeUpdate();
         statement.close();
     }
+    /**
+     * Deletes an Appointment from the database
+     * @param appointment Requires Primary Key
+     * @throws SQLException
+     */
     public static void deleteAppointment(Appointment appointment) throws SQLException {
         String query = "DELETE FROM appointments WHERE Appointment_ID = ?;";
         PreparedStatement statement = DB.connection.prepareStatement(query);
@@ -135,6 +157,12 @@ public class AppointmentsQuery {
         statement.executeUpdate();
         statement.close();
     }
+
+    /**
+     * Deletes all Appointments assigned to a single Customer
+     * @param customer Requires Primary Key
+     * @throws SQLException
+     */
     public static void deleteAppointmentsByCustomerID(Customer customer) throws SQLException {
         String query = "DELETE FROM appointments WHERE Customer_ID = ?;";
         PreparedStatement statement = DB.connection.prepareStatement(query);
@@ -142,6 +170,12 @@ public class AppointmentsQuery {
         statement.executeUpdate();
         statement.close();
     }
+
+    /**
+     * Looks for an Appointment that starts sometime between now and 15 minutes
+     * @return Appointment object
+     * @throws SQLException
+     */
     public static Appointment findUpcomingAppointment() throws SQLException {
         LocalDateTime currentTime = LocalDateTime.now(ZoneOffset.UTC);
         LocalDateTime endTime = currentTime.plusMinutes(15);
@@ -203,6 +237,14 @@ public class AppointmentsQuery {
             return null;
         }
     }
+
+    /**
+     * Retrieves all Appointments that are assigned to as specific Contact
+     * REQUIREMENT 3f: Used to create one of the three required reports
+     * @param contact Requires Primary Key
+     * @return An ObservableList of Appointments with matching Contact
+     * @throws SQLException
+     */
     public static ObservableList<Appointment> getAppointmentsByContact(Contact contact) throws SQLException {
         String query = "" +
             "SELECT " +
@@ -256,6 +298,13 @@ public class AppointmentsQuery {
         statement.close();
         return appointmentsList;
     }
+
+    /**
+     * Retrieves a count of the total number of appointments of each type by each month of each year
+     * REQUIREMENT 3f: Used to create one of the three required reports
+     * @return An ObservableList of AppointmentTypeCount objects
+     * @throws SQLException
+     */
     public static ObservableList<AppointmentTypeCount> getAppointmentTypeCountRecords() throws SQLException {
         String query = "SELECT YEAR(Start) AS Year, MONTH(Start) AS Month, Type, COUNT(*) AS Total FROM appointments GROUP BY YEAR(Start), MONTH(Start), Type ORDER BY Year, Month;";
         Statement statement = DB.connection.createStatement();

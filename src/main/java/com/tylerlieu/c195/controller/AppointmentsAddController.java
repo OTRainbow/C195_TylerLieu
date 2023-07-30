@@ -19,39 +19,106 @@ import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/** This is the controller for managing the appointmentsAddForm.fxml view. */
 public class AppointmentsAddController implements Initializable {
+    /**
+     * A field for appointmentID
+     */
     public TextField fldID;
+    /**
+     * A field for appointment title
+     */
     public TextField fldTitle;
+    /**
+     * A field for appointment description
+     */
     public TextArea fldDescription;
+    /**
+     * A field for appointment location
+     */
     public TextField fldLocation;
+    /**
+     * A field for appointment type
+     */
     public TextField fldType;
+    /**
+     * A combobox to select a Contact
+     */
     public ComboBox<Contact> cboxContact;
+    /**
+     * A list of Contacts to populate cboxContact
+     */
     public ObservableList<Contact> contactsList;
+    /**
+     * A combobox to select a Customer
+     */
     public ComboBox<Customer> cboxCustomer;
+    /**
+     * A list of Customers to populate cboxCustomer
+     */
     public ObservableList<Customer> customersList;
+    /**
+     * A combobox to select a User
+     */
     public ComboBox<User> cboxUser;
+    /**
+     * A list of Users to populate cboxUser
+     */
     public ObservableList<User> usersList;
+    /**
+     * A date picker to pick the date
+     */
     public DatePicker datePicker;
+    /**
+     * A combobox to select the start time
+     */
     public ComboBox<ZonedDateTime> cboxStartTime;
+    /**
+     * A combobox to select the end time
+     */
     public ComboBox<ZonedDateTime> cboxEndTime;
-    public Button btnAdd;
-    public Button btnCancel;
-    public Label lblEndTime;
-    public Alert blankFields;
-    public Alert attemptFailed;
-    public Alert overlapIssue;
-    public Alert businessHours;
+    /**
+     * A label for start time
+     */
     public Label lblStartTime;
+    /**
+     * A label for end time
+     */
+    public Label lblEndTime;
+    /**
+     * An Alert to show if the user leaves a field blank when they click add
+     */
+    public Alert blankFields;
+    /**
+     * An Alert to show if adding the customer in the database fails
+     */
+    public Alert attemptFailed;
+    /**
+     * An Alert to show if the appointment overlaps with another appointment
+     */
+    public Alert overlapIssue;
+    /**
+     * An Alert to show if the appointment is outside of business hours
+     */
+    public Alert businessHours;
 
+    /**
+     * This method is called as soon as the view begins to load.
+     * First, it loads all the alerts.
+     * Then, it populates contactsList, customersList, usersList.
+     * Finally, it calls a method to set up custom cell factories for the time comboboxes
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Load Alerts
         blankFields = new Alert(Alert.AlertType.ERROR);
         blankFields.setContentText("One or more items have been left blank. Please fill in all fields.");
         attemptFailed = new Alert(Alert.AlertType.ERROR);
@@ -61,6 +128,7 @@ public class AppointmentsAddController implements Initializable {
         businessHours = new Alert(Alert.AlertType.ERROR);
         businessHours.setContentText("Unable to add appointment because it exceeds businesss hours (8AM to 10PM Eastern Time)");
 
+        // Populate Lists
         try {
             contactsList = ContactsQuery.getAllContacts();
             customersList = CustomersQuery.getAllCustomerRecords();
@@ -76,7 +144,17 @@ public class AppointmentsAddController implements Initializable {
         // Set custom cell factories for time boxes
         setUpTimeBoxes();
     }
+
+    /**
+     * This method is called when the user clicks the add button.
+     * First, it checks for input errors.
+     * Then, it creates a new Appointment object.
+     * Then, it attempts to run AppointmentsQuery.addAppointment(Appointment).
+     * If successful, the method reloads all the tables and closes the form stage.
+     * @param actionEvent Used to get current stage
+     */
     public void onButtonAddClick(ActionEvent actionEvent) {
+        // Check for errors
         if (areThereAnyBlankFields()) {
             blankFields.showAndWait();
             return;
@@ -89,6 +167,7 @@ public class AppointmentsAddController implements Initializable {
             businessHours.showAndWait();
             return;
         }
+        // Construct new appointment
         Appointment appointment = new Appointment(
             fldTitle.getText(),
             fldDescription.getText(),
@@ -104,30 +183,76 @@ public class AppointmentsAddController implements Initializable {
             cboxContact.getValue().getName(),
             cboxContact.getValue().getEmail()
         );
+        // Add appointment to database
         try {
             AppointmentsQuery.addAppointment(appointment);
         } catch (SQLException e) {
             attemptFailed.showAndWait();
             throw new RuntimeException(e);
         }
+        // Reload tables
         AppointmentsController.loadTable();
         HomeController.loadAppointmentTypesTable();
-        HomeController.loadContactScheduleTable(cboxContact.getValue());
+        HomeController.loadContactScheduleTable(HomeController.selectedContact);
+        // Close the form
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * This method is called when the user clicks on the cancel button.
+     * It simply closes the form stage so that the user can return to the main view.
+     * @param actionEvent Used to get current stage
+     */
     public void onButtonCancelClick(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
-    public void onStartTimeSelect(ActionEvent actionEvent) {
+
+    /**
+     * This method is called when the user changes the selected date in datePicker.
+     * It runs a loop that generates a startTimeSelectionList that can be used to populate cboxStartTime.
+     */
+    public void onDateSelected() {
+        // Enable and disable
+        if (datePicker.getValue() == null) {
+            lblStartTime.setDisable(true);
+            cboxStartTime.setDisable(true);
+            cboxStartTime.valueProperty().set(null);
+            lblEndTime.setDisable(true);
+            cboxEndTime.setDisable(true);
+            cboxEndTime.valueProperty().set(null);
+        } else {
+            lblStartTime.setDisable(false);
+            cboxStartTime.setDisable(false);
+            cboxStartTime.valueProperty().set(null);
+            lblEndTime.setDisable(true);
+            cboxEndTime.setDisable(true);
+            cboxEndTime.valueProperty().set(null);
+            // Loop to populate cboxStartTime
+            ObservableList<ZonedDateTime> startTimeSelectionList = FXCollections.observableArrayList();
+            ZonedDateTime iTime = ZonedDateTime.of(datePicker.getValue(), LocalTime.of(8,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault());
+            ZonedDateTime lastTime = ZonedDateTime.of(datePicker.getValue(), LocalTime.of(22,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault());
+            while (iTime.isBefore(lastTime)) {
+                startTimeSelectionList.add(iTime);
+                iTime = iTime.plusMinutes(5);
+            }
+            cboxStartTime.setItems(startTimeSelectionList);
+        }
+    }
+
+    /**
+     * This method is called when the user selects a start time.
+     * It runs a loop that generates a endTimeSelectionList that can be used to populate cboxEndTime.
+     */
+    public void onStartTimeSelect() {
+        // Reset and Enable end time
         lblEndTime.setDisable(false);
         cboxEndTime.setDisable(false);
         cboxEndTime.valueProperty().set(null);
         if (cboxStartTime.getValue() == null) {
             return;
         }
+        // Loop to populate cboxEndTime
         ObservableList<ZonedDateTime> endTimeSelectionList = FXCollections.observableArrayList();
         ZonedDateTime iTime = cboxStartTime.getValue().plusMinutes(5);
         ZonedDateTime lastTime = ZonedDateTime.of(datePicker.getValue(), LocalTime.of(22,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault());
@@ -137,6 +262,11 @@ public class AppointmentsAddController implements Initializable {
         }
         cboxEndTime.setItems(endTimeSelectionList);
     }
+
+    /**
+     * Validates input by checking for blank fields
+     * @return True if there are any blank fields
+     */
     public Boolean areThereAnyBlankFields() {
         return fldTitle.getText().isEmpty() ||
                 fldDescription.getText().isEmpty() ||
@@ -149,6 +279,11 @@ public class AppointmentsAddController implements Initializable {
                 cboxStartTime.getValue() == null ||
                 cboxEndTime.getValue() == null;
     }
+
+    /**
+     * Validates input by making sure appointments never overlap for customers
+     * @return True if there is an overlapping appointment
+     */
     public Boolean doesThisOverlap() {
         for (Appointment existingAppointment : AppointmentsController.appointmentsList) {
             if (!(existingAppointment.getCustomerID() == cboxCustomer.getValue().getCustomerID())) {
@@ -172,6 +307,12 @@ public class AppointmentsAddController implements Initializable {
         }
         return false;
     }
+
+    /**
+     * Validates input by checking if start or end times fall outside business hours.
+     * In theory, this should always be false since there are measures to prevent such selection.
+     * @return True if any time is out of business hours
+     */
     public Boolean isThisOutOfBusinessHours() {
         // This exception should never happen, but exists to satisfy requirement 3d
         if (cboxStartTime.getValue().isBefore(ZonedDateTime.of(datePicker.getValue(), LocalTime.of(8,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault()))) {
@@ -189,37 +330,28 @@ public class AppointmentsAddController implements Initializable {
         return false;
     }
 
-    public void onDateSelected(ActionEvent actionEvent) {
-        if (datePicker.getValue() == null) {
-            lblStartTime.setDisable(true);
-            cboxStartTime.setDisable(true);
-            cboxStartTime.valueProperty().set(null);
-            lblEndTime.setDisable(true);
-            cboxEndTime.setDisable(true);
-            cboxEndTime.valueProperty().set(null);
-        } else {
-            lblStartTime.setDisable(false);
-            cboxStartTime.setDisable(false);
-            cboxStartTime.valueProperty().set(null);
-            lblEndTime.setDisable(true);
-            cboxEndTime.setDisable(true);
-            cboxEndTime.valueProperty().set(null);
-
-            ObservableList<ZonedDateTime> startTimeSelectionList = FXCollections.observableArrayList();
-            ZonedDateTime iTime = ZonedDateTime.of(datePicker.getValue(), LocalTime.of(8,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault());
-            ZonedDateTime lastTime = ZonedDateTime.of(datePicker.getValue(), LocalTime.of(22,0), ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.systemDefault());
-            while (iTime.isBefore(lastTime)) {
-                startTimeSelectionList.add(iTime);
-                iTime = iTime.plusMinutes(5);
-            }
-            cboxStartTime.setItems(startTimeSelectionList);
-        }
-    }
+    /**
+     * This method takes a ZonedDateTime object and formats it into a String that shows the time.
+     * Only used for setUpTimeBoxes().
+     * @param zdt A ZonedDateTime to be formatted
+     * @return formatted time as String
+     */
     public String formatZonedDateTime(ZonedDateTime zdt) {
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("h:mm a");
         return zdt.format(timeFormat);
     }
 
+    /**
+     * The purpose of this method is to allow the two comboboxes to contain ZonedDateTime objects but display them as Strings of time.
+     * Both comboboxes use the setCellFactory(Callback) method to set custom implementation for showing data.
+     * Both comboboxes also use the setConverter(StringConverter) method to set custom implementations for switching between ZonedDateTime and String.
+     * <p>
+     * LAMBDA: In this method, lambdas are used in place of Callbacks when using setCellFactory. This is an intentional
+     * choice to prevent having to deal with the complexity of the Callback interface. Because lambdas were used over Callbacks,
+     * the resulting code is much easier to write, easier to read, and easier to understand. In simple cases like this, lambdas
+     * are the better option.
+     * </p>
+     */
     public void setUpTimeBoxes() {
         // Set custom cell factories for time boxes
         cboxStartTime.setCellFactory(param -> new ListCell<>() {

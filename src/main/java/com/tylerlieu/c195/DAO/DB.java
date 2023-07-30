@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * DB Class for opening, storing, and closing database connections
+ */
 public class DB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/client_schedule";
     private static final String DB_USER = "sqlUser";

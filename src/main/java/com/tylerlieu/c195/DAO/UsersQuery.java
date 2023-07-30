@@ -16,7 +16,15 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Static class for methods used to perform queries on the users table
+ */
 public class UsersQuery {
+    /**
+     * Retrieves all Users from the database.
+     * @return An ObservableList of User objects
+     * @throws SQLException
+     */
     public static ObservableList<User> getAllUsers() throws SQLException {
         String query = "SELECT User_ID as userID, User_Name as userName FROM users;";
         Statement statement = DB.connection.createStatement();
@@ -33,6 +41,16 @@ public class UsersQuery {
         statement.close();
         return usersList;
     }
+
+    /**
+     * Attempts to log the user into the system by finding a record with a matching username and password combination.
+     * REQUIREMENT C: Records each log-in attempt into login_activity.txt
+     * @param username Input from user
+     * @param password Input from user
+     * @return Returns true if successful, false if unsuccessful
+     * @throws SQLException
+     * @throws IOException
+     */
     public static boolean tryLogin(String username, String password) throws SQLException, IOException {
         FileWriter fileWriter = new FileWriter( System.getProperty("user.dir") + "/login_activity.txt", true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

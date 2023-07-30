@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tylerlieu.c195.controller.CustomersController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tylerlieu.c195.controller.CustomersController">
     <TableView fx:id="customersTable" layoutX="14.0" layoutY="77.0" prefHeight="600.0" prefWidth="840.0" tableMenuButtonVisible="true">
         <columns>
             <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
